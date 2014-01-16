@@ -1,0 +1,106 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+{% block extratitle %}{% trans "Edit tags" %}{% endblock %}
+
+
+{% block extrajs %}
+<script type="text/javascript">
+
+$(function () {
+    $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
+    $('.tree li.parent_li > span').on('click', function (e) {
+        var children = $(this).parent('li.parent_li').find(' > ul > li');
+        if (children.is(":visible")) {
+            children.hide('fast');
+            $(this).attr('title', 'Expand this branch').find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+        } else {
+            children.show('fast');
+            $(this).attr('title', 'Collapse this branch').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+        }
+        e.stopPropagation();
+    });
+});
+
+	function updateTagList(){
+		$('[name="specific_tag"]').each(function(){
+			$(this).attr("style", "display:none;");
+		});
+		
+		search_phrase = $('[name="tag_searched"]').val();
+		if (search_phrase ==""){
+			return;
+		}
+			
+		$('[name="major_tag"]').each(function(){
+			if ($(this).text().indexOf(search_phrase)!=-1){
+				$(this).parent().parent().parent().parent().attr("style", "display:block;");
+			}
+		});
+			
+		$('[name="minor_tag"]').each(function(){
+			if ($(this).text().indexOf(search_phrase)!=-1){
+				$(this).parent().parent().parent().parent().attr("style", "display:block;");
+			}
+		});
+	}
+	
+	function addSubTag(){
+		
+	}
+	
+</script>
+{%endblock %}
+
+
+{% block breadcrumbs %}
+    <li class="active">{% trans "Edit tags" %}</li>
+{% endblock %}
+
+{% block content %}
+
+<div class="card card-main">
+    <div class="spacer fill">
+    	      
+		<label> תגית לחיפוש: </label>
+		<input name="tag_searched" type="text" onkeyup="updateTagList();"/>
+		
+		<div class="tree">
+			<ul>
+		        <li>
+	        		{% for tag in tags %}	
+		        		<div name="specific_tag" style="display:none;">
+				        	<span class="badge badge-important">
+				        		<i class="icon-tags"></i> 
+				        		<div name="major_tag"> 
+				        			{{tag}} 
+				        		</div>
+				        	</span>
+				            <ul>
+				                <li>
+				                	<span class="badge badge-success">
+					                	<i class="icon-tag"></i> 
+					                	
+					                	<div name="minor_tag"> 
+					                		{{tag}} 
+					                	</div>
+				                	</span>
+				                </li>
+				                <br>
+				                <li>
+					                <input name="add_sub_tag" value='הכנס תגית בת' type="text" onfocus="this.value=''" onblur="this.value='הכנס תגית בת'"> 
+						    		<button type="button" class="btn btn-info" onclick="addSubTag();">הוסף</button>	
+								</li>
+				            </ul>
+			    		<br>
+			    		</div>
+	  		    	{% endfor %}
+		            
+		        </li>
+		        <br>
+		    </ul>
+		    <br>
+		</div>
+		
+    </div>
+</div>
+{% endblock %}
