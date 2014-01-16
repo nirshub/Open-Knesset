@@ -102,6 +102,10 @@ MS Windows
 - If you haven't already forked the repository (top right of page), do so. 
 - Clone the repository. In the `oknesset` directory and run
   ``git clone git@github.com:your-name/Open-Knesset.git``
+- Some of the requirements need to compile some C code, so visual studio needed to be installed on the computer.
+	Make sure that you have VS90COMNTOOLS environment variable, referencing to ``Common7\Tools`` inside your visual studio install dir.
+	For example, ``C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\Tools``.
+	If you don't have visual studio installed, use this guide: ``http://blog.eddsn.com/2010/05/unable-to-find-vcvarsall-bat/.``
 - Install requirements: ``pip install -r Open-Knesset\requirements.txt`` and
   wait.
 - Run the tests::
