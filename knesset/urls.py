@@ -100,6 +100,7 @@ urlpatterns = patterns('',
     (r'^suggestions/', include('suggestions.urls')),
     url(r'^feedback/', post_feedback, name="feedback-post"),
     url(r'^untagged/$', untagged_objects, name="untagged-objects"),
+    (r'^edittags/', include('edittags.urls')),
 )
 
 
