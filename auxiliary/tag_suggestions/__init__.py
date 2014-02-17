@@ -34,7 +34,7 @@ def sum_add_two_dictionaries(dict, dict_to_add):
 
 
 #A list of prefix charcters to use in tag extraction
-prefixes = [u'ב', u'ו', u'ה', u'מ', u'מה', u'ל', u'']
+prefixes = [u'ש', u'כ', u'ב', u'ו', u'ה', u'מ', u'מה', u'ל', u'']
 _all_tags_names = []
 
 def all_tags_names():
